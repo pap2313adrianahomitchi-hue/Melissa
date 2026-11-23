@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Numere întregi – Matematică clasa a VI-a</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+:root{--bg:#fbfcff;--grid:#cfdcf2;--ink:#1b2a4e;--blue:#1d4ed8;--red:#c62f3b;--box:#eef3ff;--ok:#e9f7ee;--line:#b9c8e6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#0f1626;--grid:#1d2a45;--ink:#e6ebf7;--blue:#8fb0ff;--red:#ff8a93;--box:#17223b;--ok:#13291f;--line:#2f4066}}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 "Atkinson Hyperlegible",system-ui,sans-serif;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:28px 28px}
+.wrap{display:flex;max-width:1100px;margin:0 auto;gap:24px;padding:0 16px}
+nav{width:270px;flex:none;position:sticky;top:0;align-self:flex-start;max-height:100vh;overflow:auto;padding:20px 0}
+nav h1{font:700 30px/1.1 Caveat,cursive;margin:0 0 4px;color:var(--blue)}
+nav p{margin:0 0 12px;font-size:14px;opacity:.8}
+nav a{display:block;padding:6px 10px;border-left:3px solid var(--line);text-decoration:none;color:inherit;font-size:15px;background:var(--bg)}
+nav a:hover{border-color:var(--blue)}
+nav a.on{border-color:var(--red);font-weight:700;background:var(--box)}
+main{flex:1;min-width:0;background:var(--bg);border-left:2px solid var(--red);padding:22px 22px 40px 28px;margin:20px 0;box-shadow:0 0 0 1px var(--line)}
+h2{font:700 38px/1.1 Caveat,cursive;color:var(--blue);margin:0 0 14px}
+h3{font:700 26px Caveat,cursive;margin:26px 0 6px}
+.rule{background:var(--box);border-left:4px solid var(--blue);padding:10px 14px;margin:10px 0;border-radius:0 6px 6px 0}
+.rule b:first-child{color:var(--blue)}
+.ex,.pr{border:1px solid var(--line);border-radius:6px;padding:10px 14px;margin:10px 0;background:var(--bg)}
+.ex .s{margin-top:6px;padding:6px 10px;background:var(--ok);border-radius:4px}
+details summary{cursor:pointer;font-weight:700;color:var(--blue)}
+details .s{margin-top:6px}
+.pr details{margin-top:4px}
+.btns{display:flex;justify-content:space-between;gap:10px;margin-top:30px}
+.btns a{padding:8px 14px;border:2px solid var(--blue);border-radius:6px;color:var(--blue);text-decoration:none;font-weight:700}
+.btns a:focus-visible,nav a:focus-visible,summary:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+table{border-collapse:collapse;margin:8px 0}td,th{border:1px solid var(--line);padding:4px 12px;text-align:center}
+.scroll{overflow-x:auto}svg{max-width:100%;height:auto}
+@media (max-width:800px){.wrap{display:block;padding:0 8px}nav{width:auto;position:static;max-height:none;padding:12px 0}nav .l{display:flex;overflow-x:auto;gap:4px}nav a{white-space:nowrap;border:1px solid var(--line);border-radius:16px}nav a.on{border-color:var(--red)}main{padding:16px 14px 30px 18px;margin:8px 0}h2{font-size:32px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav><h1>Numere întregi</h1><p>Matematică · clasa a VI-a</p><div class="l" id="list"></div></nav>
+<main id="m" tabindex="-1"></main>
+</div>
+<script>
+var T=[
+{t:"Mulțimea numerelor întregi",h:`
+<div class="rule"><b>Definiție.</b> Mulțimea numerelor întregi este <b>Z = {…, −3, −2, −1, 0, 1, 2, 3, …}</b>. Ea conține numerele naturale și opusele lor.</div>
+<ul><li>Numere întregi <b>pozitive</b>: Z<sub>+</sub> = {1, 2, 3, …} (se scriu +1, +2, … sau simplu 1, 2, …).</li>
+<li>Numere întregi <b>negative</b>: Z<sub>−</sub> = {…, −3, −2, −1}.</li>
+<li>Zero nu este nici pozitiv, nici negativ.</li>
+<li><b>Z* = Z \\ {0}</b> (întregi nenule).</li>
+<li>Relația dintre mulțimi: <b>N ⊂ Z</b> (orice număr natural este întreg).</li></ul>
+<p>Numerele negative apar în viața reală: temperaturi sub 0°C, adâncimi sub nivelul mării, datorii.</p>`,
+e:[["Care dintre numerele −5; 0; 2,5; 3/4; 12 aparțin lui Z?","Aparțin: −5, 0, 12. Nu aparțin: 2,5 (zecimal) și 3/4 (fracție care nu se simplifică la întreg)."],
+["Scrie cu numere întregi: temperatura este 7 grade sub zero; un submarin la 40 m sub nivelul mării.","−7°C; −40 m."]],
+p:[["Scrie elementele mulțimii A = {x ∈ Z | −3 ≤ x < 2}.","A = {−3, −2, −1, 0, 1}"],["Adevărat sau fals: Z<sub>−</sub> ⊂ N.","Fals. Numerele negative nu sunt naturale."]]},
+
+{t:"Axa numerelor, numerele opuse",h:`
+<div class="rule"><b>Axa numerelor</b> este o dreaptă pe care alegem: o <b>origine</b> (punctul O, corespunde lui 0), un <b>sens pozitiv</b> (de obicei spre dreapta) și o <b>unitate de măsură</b>. Numerele pozitive sunt la dreapta lui 0, cele negative la stânga.</div>
+<div class="scroll"><svg viewBox="0 0 620 70" width="620" role="img" aria-label="Axa numerelor de la −5 la 5"><g stroke="currentColor" fill="currentColor" font-size="15" text-anchor="middle"><line x1="10" y1="30" x2="605" y2="30" stroke-width="2"/><path d="M605 30l-9-5v10z"/><g id="ticks"></g></g></svg></div>
+<div class="rule"><b>Numere opuse.</b> Opusul lui <i>a</i> este <i>−a</i>. Ele sunt simetrice față de origine, la aceeași distanță de 0.<br>
+• <b>a + (−a) = 0</b> &nbsp; • <b>−(−a) = a</b> &nbsp; • opusul lui 0 este 0.</div>`,
+e:[["Află opusul numerelor 8; −13; 0; −(−4).","Opusul lui 8 este −8; al lui −13 este 13; al lui 0 este 0; −(−4) = 4, deci opusul lui −(−4) este −4."],
+["Care este numărul ale cărui opus este −21?","Numărul este 21, deoarece opusul lui 21 este −21."]],
+p:[["Care este opusul opusului lui −9?","−9"],["Puncte A(−4) și B(4) pe axă. Ce poziție au față de origine?","Sunt simetrice față de O (numere opuse)."]]},
+
+{t:"Modulul unui număr întreg",h:`
+<div class="rule"><b>Definiție.</b> Modulul (valoarea absolută) a lui <i>a</i> este distanța de la <i>a</i> la origine pe axă.<br>
+<b>|a| = a</b>, dacă a ≥ 0 &nbsp;&nbsp; <b>|a| = −a</b>, dacă a &lt; 0.</div>
+<ul><li>|a| ≥ 0 întotdeauna.</li><li>|a| = |−a| (opusele au același modul).</li><li>|a| = 0 ⇔ a = 0.</li>
+<li>Ecuația |x| = k, cu k &gt; 0, are două soluții: x = k și x = −k. Pentru k &lt; 0 nu are soluții.</li></ul>`,
+e:[["Calculează |−8| + |5| − |−3|.","= 8 + 5 − 3 = 10"],
+["Află x ∈ Z astfel încât |x| = 6.","x ∈ {−6, 6}"],
+["Află x ∈ Z cu |x| ≤ 2.","x ∈ {−2, −1, 0, 1, 2}"],
+["Rezolvă |x| = −4.","Nu are soluții, deoarece un modul nu poate fi negativ."]],
+p:[["Calculează |−12| : |−4|.","12 : 4 = 3"],["Află x ∈ Z cu |x| &lt; 3.","x ∈ {−2, −1, 0, 1, 2}"]]},
+
+{t:"Compararea și ordonarea numerelor întregi",h:`
+<div class="rule"><b>Reguli.</b> • Orice număr negativ &lt; 0 &lt; orice număr pozitiv.<br>
+• Din două numere pe axă, mai mare este cel aflat <b>mai la dreapta</b>.<br>
+• Două numere pozitive: mai mare e cel cu modulul mai mare.<br>
+• Două numere negative: <b>mai mare e cel cu modulul mai mic</b> (−3 &gt; −7).</div>
+<p>Ordonare <b>crescătoare</b> = de la cel mai mic la cel mai mare (cu &lt;). <b>Descrescătoare</b> = invers (cu &gt;).</p>`,
+e:[["Compară: −9 și −2; −15 și 4; −6 și −6.","−9 &lt; −2 (|−9| = 9 &gt; 2); −15 &lt; 4; −6 = −6."],
+["Ordonează crescător: 3, −5, 0, −1, 7, −8.","−8 &lt; −5 &lt; −1 &lt; 0 &lt; 3 &lt; 7"],
+["Scrie numerele întregi x cu −3 &lt; x ≤ 2.","x ∈ {−2, −1, 0, 1, 2}"]],
+p:[["Care este cel mai mare număr întreg negativ?","−1"],["Ordonează descrescător: −4, 2, −10, 0.","2 &gt; 0 &gt; −4 &gt; −10"]]},
+
+{t:"Adunarea numerelor întregi",h:`
+<div class="rule"><b>Același semn:</b> se adună modulele și se păstrează semnul.<br>
+<b>Semne diferite:</b> se scade modulul mai mic din cel mai mare și se pune semnul numărului cu modulul mai mare.</div>
+<p>Pe axă: a aduna un număr pozitiv înseamnă a merge spre dreapta, unul negativ înseamnă a merge spre stânga.</p>`,
+e:[["(−5) + (−7)","Același semn (−): 5 + 7 = 12 → <b>−12</b>"],
+["(−9) + 4","Semne diferite: 9 − 4 = 5, semnul lui −9 → <b>−5</b>"],
+["12 + (−5)","12 − 5 = 7, semnul lui 12 → <b>7</b>"],
+["(−6) + 6","Opuse → <b>0</b>"],
+["−18 + 25 + (−10)","= 7 + (−10) = <b>−3</b>"]],
+p:[["(−14) + (−6)","−20"],["(−3) + 11","8"],["15 + (−23)","−8"]]},
+
+{t:"Proprietăți ale adunării numerelor întregi",h:`
+<div class="rule"><b>Pentru orice a, b, c ∈ Z:</b><br>
+• <b>Comutativitatea:</b> a + b = b + a<br>
+• <b>Asociativitatea:</b> (a + b) + c = a + (b + c)<br>
+• <b>Element neutru:</b> a + 0 = 0 + a = a<br>
+• <b>Opusul:</b> a + (−a) = 0</div>
+<p>Folosim proprietățile pentru a grupa convenabil termenii (pozitivi cu pozitivi, negativi cu negativi sau opuși între ei).</p>`,
+e:[["Calculează: (−17) + 25 + (−3) + 15.","Grupăm: [(−17) + (−3)] + (25 + 15) = −20 + 40 = <b>20</b>"],
+["Calculează: 1 + (−2) + 3 + (−4) + … + 99 + (−100).","Perechile (1 − 2), (3 − 4), … au suma −1 și sunt 50 de perechi: <b>−50</b>"],
+["Calculează: (−8) + 13 + 8 + (−13).","(−8 + 8) + (13 − 13) = <b>0</b>"]],
+p:[["(−25) + 47 + (−75) + 3","−50 (grupăm −25−75 = −100 și 47+3 = 50)"],["Ce proprietate: (−2) + (3 + 5) = ((−2) + 3) + 5?","Asociativitatea"]]},
+
+{t:"Scăderea numerelor întregi",h:`
+<div class="rule"><b>Regulă.</b> A scădea un număr înseamnă a adăuga opusul lui: <b>a − b = a + (−b)</b>.</div>
+<div class="rule"><b>Eliminarea parantezelor.</b><br>
+• Paranteză precedată de <b>+</b>: semnele din interior rămân.<br>
+• Paranteză precedată de <b>−</b>: semnele din interior se schimbă.</div>`,
+e:[["5 − 8","5 + (−8) = <b>−3</b>"],
+["(−4) − (−9)","(−4) + 9 = <b>5</b>"],
+["(−7) − 3","(−7) + (−3) = <b>−10</b>"],
+["10 − (3 − 8 + 2)","= 10 − 3 + 8 − 2 = <b>13</b>"],
+["Află diferența dintre 15 și −6.","15 − (−6) = 15 + 6 = <b>21</b>"]],
+p:[["(−12) − (−12)","0"],["−5 − (−2 + 9)","−5 + 2 − 9 = −12"],["0 − (−11)","11"]]},
+
+{t:"Distanța dintre 2 puncte pe axa numerelor",h:`
+<div class="rule"><b>Formulă.</b> Dacă A(a) și B(b) sunt puncte pe axă, distanța dintre ele este<br><b>AB = |a − b| = |b − a|</b> (adică numărul mai mare minus cel mai mic).</div>
+<p>Distanța este întotdeauna un număr ≥ 0. Pe axă, pentru a găsi punctele aflate la distanța d de A(a), calculăm a + d și a − d.</p>`,
+e:[["A(−3) și B(4). Află AB.","AB = |−3 − 4| = |−7| = <b>7</b>"],
+["A(−6) și B(−2). Află AB.","AB = |−6 − (−2)| = |−4| = <b>4</b>"],
+["Află punctele aflate la distanța 5 de A(−1).","−1 + 5 = 4 și −1 − 5 = −6. Punctele sunt <b>B(4)</b> și <b>C(−6)</b>."],
+["Punctul M(x) are distanța 3 față de origine. Află x.","|x − 0| = 3 → x ∈ {−3, 3}"]],
+p:[["A(−8), B(5). AB = ?","13"],["Punctele aflate la distanța 2 de A(3).","1 și 5"]]},
+
+{t:"Înmulțirea numerelor întregi",h:`
+<div class="rule"><b>Regula semnelor:</b><br>
+(+)·(+) = + &nbsp;&nbsp; (−)·(−) = + &nbsp;&nbsp; (+)·(−) = − &nbsp;&nbsp; (−)·(+) = −<br>
+Se înmulțesc modulele și se stabilește semnul. Semne la fel → plus; semne diferite → minus.</div>
+<ul><li>a · 0 = 0 &nbsp;• a · 1 = a &nbsp;• a · (−1) = −a</li>
+<li>Produs cu număr <b>par</b> de factori negativi → pozitiv; cu număr <b>impar</b> → negativ.</li>
+<li>Comutativă, asociativă, distributivă față de adunare/scădere: a(b + c) = ab + ac.</li></ul>`,
+e:[["(−6) · 7","6 · 7 = 42, semne diferite → <b>−42</b>"],
+["(−4) · (−5)","<b>20</b>"],
+["(−2) · (−3) · (−4)","Trei factori negativi (impar) → <b>−24</b>"],
+["(−3) · (5 − 9)","(−3) · (−4) = <b>12</b>"],
+["(−25) · 17 · (−4)","(−25)(−4) · 17 = 100 · 17 = <b>1700</b>"]],
+p:[["(−8) · (−9)","72"],["(−1) · (−1) · (−1) · (−1)","1"],["(−5)(2 − 6)","20"]]},
+
+{t:"Împărțirea numerelor întregi",h:`
+<div class="rule"><b>Definiție.</b> a : b = c dacă a = b · c (cu <b>b ≠ 0</b>). Împărțirea la 0 nu este posibilă.<br>
+<b>Regula semnelor</b> este aceeași ca la înmulțire: semne la fel → +; semne diferite → −.</div>
+<ul><li>0 : b = 0 (b ≠ 0)</li><li>a : 1 = a; a : (−1) = −a; a : a = 1</li>
+<li>Rezultatul e întreg doar dacă b divide pe a (de exemplu, 7 : 2 ∉ Z).</li></ul>`,
+e:[["(−24) : 6","<b>−4</b>"],
+["(−30) : (−5)","<b>6</b>"],
+["18 : (−3)","<b>−6</b>"],
+["Divizorii lui −6 în Z.","±1, ±2, ±3, ±6, adică {−6, −3, −2, −1, 1, 2, 3, 6}"],
+["Calculează [(−48) : 8] · (−3).","(−6) · (−3) = <b>18</b>"]],
+p:[["(−56) : (−7)","8"],["0 : (−9)","0"],["(−100) : 25","−4"]]},
+
+{t:"Puterea unui număr întreg cu exponent natural",h:`
+<div class="rule"><b>Definiție.</b> a<sup>n</sup> = a · a · … · a (n factori), pentru n ≥ 2. &nbsp; a<sup>1</sup> = a. &nbsp; a<sup>0</sup> = 1 (a ≠ 0).</div>
+<div class="rule"><b>Semnul puterii:</b><br>
+• baza <b>pozitivă</b> → rezultat pozitiv;<br>
+• baza <b>negativă</b>, exponent <b>par</b> → <b>+</b>; exponent <b>impar</b> → <b>−</b>.<br>
+• (−1)<sup>par</sup> = 1, (−1)<sup>impar</sup> = −1; 0<sup>n</sup> = 0 (n ≥ 1).</div>
+<p><b>Atenție:</b> (−2)<sup>4</sup> = 16, dar −2<sup>4</sup> = −16 (minusul nu e în bază).</p>`,
+e:[["(−3)<sup>3</sup>","(−3)(−3)(−3) = <b>−27</b>"],
+["(−2)<sup>4</sup> și −2<sup>4</sup>","(−2)<sup>4</sup> = <b>16</b>; −2<sup>4</sup> = <b>−16</b>"],
+["(−1)<sup>2023</sup> + (−1)<sup>2024</sup>","−1 + 1 = <b>0</b>"],
+["Compară (−5)<sup>2</sup> cu −5<sup>2</sup>.","25 &gt; −25"]],
+p:[["(−4)<sup>2</sup>","16"],["(−10)<sup>3</sup>","−1000"],["(−7)<sup>0</sup>","1"]]},
+
+{t:"Proprietățile puterii cu exponent natural a numărului întreg",h:`
+<div class="rule"><b>Pentru a, b ∈ Z*, m, n ∈ N:</b><br>
+• a<sup>m</sup> · a<sup>n</sup> = a<sup>m+n</sup><br>
+• a<sup>m</sup> : a<sup>n</sup> = a<sup>m−n</sup> (m ≥ n)<br>
+• (a<sup>m</sup>)<sup>n</sup> = a<sup>m·n</sup><br>
+• (a · b)<sup>n</sup> = a<sup>n</sup> · b<sup>n</sup><br>
+• (a : b)<sup>n</sup> = a<sup>n</sup> : b<sup>n</sup></div>
+<p>Atenție: (a<sup>m</sup>)<sup>n</sup> ≠ a<sup>(m<sup>n</sup>)</sup>. De exemplu (2<sup>3</sup>)<sup>2</sup> = 2<sup>6</sup> = 64, dar 2<sup>(3²)</sup> = 2<sup>9</sup>.</p>`,
+e:[["(−2)<sup>3</sup> · (−2)<sup>4</sup>","(−2)<sup>7</sup> = <b>−128</b>"],
+["(−5)<sup>6</sup> : (−5)<sup>4</sup>","(−5)<sup>2</sup> = <b>25</b>"],
+["[(−3)<sup>2</sup>]<sup>3</sup>","(−3)<sup>6</sup> = <b>729</b>"],
+["(−2)<sup>3</sup> · 5<sup>3</sup>","[(−2) · 5]<sup>3</sup> = (−10)<sup>3</sup> = <b>−1000</b>"],
+["Află x din 2<sup>x</sup> = 32.","32 = 2<sup>5</sup>, deci <b>x = 5</b>"]],
+p:[["(−3)<sup>5</sup> · (−3)<sup>2</sup> : (−3)<sup>4</sup>","(−3)<sup>3</sup> = −27"],["(2<sup>2</sup>)<sup>3</sup> : 2<sup>4</sup>","2<sup>6</sup> : 2<sup>4</sup> = 4"]]},
+
+{t:"Ordinea efectuării operațiilor",h:`
+<div class="rule"><b>Ordinea:</b><br>
+1) puterile;<br>
+2) înmulțirile și împărțirile (în ordinea în care apar, de la stânga la dreapta);<br>
+3) adunările și scăderile (de la stânga la dreapta).<br>
+Dacă sunt paranteze: întâi cele <b>rotunde ( )</b>, apoi cele <b>pătrate [ ]</b>, apoi <b>acoladele { }</b>.</div>`,
+e:[["5 + (−3) · 4 − (−8) : 2","5 + (−12) − (−4) = 5 − 12 + 4 = <b>−3</b>"],
+["2 · [(−3)<sup>2</sup> − 4 · (−2)]","2 · [9 + 8] = 2 · 17 = <b>34</b>"],
+["−{3 + [−2 + (5 − 8) · 2]}","(5 − 8) · 2 = −6; −2 + (−6) = −8; 3 + (−8) = −5; −(−5) = <b>5</b>"],
+["(−2)<sup>3</sup> + 18 : (−3) − 4 · (−1)","−8 + (−6) + 4 = <b>−10</b>"]],
+p:[["20 − 6 · (−3) + (−2)<sup>2</sup>","20 + 18 + 4 = 42"],["[(−12) : 4 + 7] · (−5)","[−3 + 7] · (−5) = −20"]]},
+
+{t:"Rezolvarea ecuațiilor în Z",h:`
+<div class="rule"><b>Idee.</b> Aflăm necunoscuta x făcând operațiile inverse, păstrând egalitatea.<br>
+• x + a = b → x = b − a &nbsp; • x − a = b → x = b + a<br>
+• a · x = b → x = b : a (a ≠ 0) &nbsp; • x : a = b → x = a · b<br>
+Soluția trebuie să fie număr <b>întreg</b>; altfel ecuația nu are soluții în Z.</div>
+<div class="rule"><b>Cu modul:</b> |x| = k (k &gt; 0) → x = k sau x = −k. &nbsp; |x − a| = k → x − a = k sau x − a = −k.</div>`,
+e:[["x + 7 = −3","x = −3 − 7 = <b>−10</b>. Verificare: −10 + 7 = −3 ✓"],
+["x − 5 = −12","x = −12 + 5 = <b>−7</b>"],
+["−4 · x = 20","x = 20 : (−4) = <b>−5</b>"],
+["3x + 8 = −1","3x = −1 − 8 = −9, deci x = <b>−3</b>"],
+["|x − 2| = 3","x − 2 = 3 → x = 5; sau x − 2 = −3 → x = −1. <b>x ∈ {−1, 5}</b>"],
+["2x = 7","x = 7/2 ∉ Z, deci <b>nu are soluții în Z</b>"],
+["x − 4 &lt; −1, x ∈ Z","x &lt; 3, deci x ∈ {…, 0, 1, 2}"]],
+p:[["x − 9 = −20","x = −11"],["−2x − 3 = 7","−2x = 10, x = −5"],["|x + 1| = 4","x + 1 = 4 sau −4 → x ∈ {3, −5}"]]}
+];
+var list=document.getElementById('list'),m=document.getElementById('m');
+T.forEach(function(o,i){var a=document.createElement('a');a.href='#t'+(i+1);a.textContent=(i+1)+'. '+o.t;a.id='n'+(i+1);list.appendChild(a)});
+function ex(arr){return arr.map(function(x,i){return '<div class="ex"><b>Exemplul '+(i+1)+'.</b> '+x[0]+'<div class="s"><b>Rezolvare:</b> '+x[1]+'</div></div>'}).join('')}
+function pr(arr){return arr.map(function(x,i){return '<div class="pr"><b>Exercițiul '+(i+1)+'.</b> '+x[0]+'<details><summary>Arată răspunsul</summary><div class="s">'+x[1]+'</div></details></div>'}).join('')}
+function show(){
+  var n=parseInt((location.hash||'#t1').replace('#t',''),10);if(!(n>=1&&n<=T.length))n=1;
+  var o=T[n-1];
+  m.innerHTML='<h2>'+n+'. '+o.t+'</h2><h3>Teorie</h3>'+o.h+'<h3>Exemple rezolvate</h3>'+ex(o.e)+'<h3>Exersează singur</h3>'+pr(o.p)+
+  '<div class="btns">'+(n>1?'<a href="#t'+(n-1)+'">← '+(n-1)+'. Înapoi</a>':'<span></span>')+(n<T.length?'<a href="#t'+(n+1)+'">'+(n+1)+'. Următoarea →</a>':'<span></span>')+'</div>';
+  document.title=n+'. '+o.t+' – Matematică clasa a VI-a';
+  document.querySelectorAll('nav a').forEach(function(a){a.classList.toggle('on',a.id==='n'+n)});
+  var t=document.getElementById('ticks');
+  if(t){var s='';for(var k=-5;k<=5;k++){var x=310+k*55;s+='<line x1="'+x+'" y1="23" x2="'+x+'" y2="37"/><text x="'+x+'" y="56" stroke="none">'+(k<0?'−'+(-k):k)+'</text>'}t.innerHTML=s}
+  window.scrollTo(0,0);
+  var cur=document.getElementById('n'+n);if(cur&&cur.scrollIntoView)try{cur.scrollIntoView({block:'nearest',inline:'center'})}catch(e){}
+}
+window.addEventListener('hashchange',show);show();
+</script>
+</body>
+</html>
